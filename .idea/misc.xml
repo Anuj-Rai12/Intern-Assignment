@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/drawable/black_border.xml" value="0.2390194075587334" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/drawable/ic_camera.xml" value="0.2390194075587334" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/drawable/ic_email.xml" value="0.2390194075587334" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/activity_main.xml" value="0.2234375" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/custom_progress_bar_layout.xml" value="0.19202898550724637" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/login_fragment.xml" value="0.264" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/registration_fragment.xml" value="0.19202898550724637" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/student_dashboard_framgent.xml" value="0.19202898550724637" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/subject_item.xml" value="0.4" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/user_desc_layout.xml" value="0.4" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/why_this_course_item.xml" value="0.19202898550724637" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/work_shop_dash_fragment.xml" value="0.264" />
+        <entry key="..\:/Androidprojects/InternAssigment/app/src/main/res/layout/workshop_fragment.xml" value="0.19202898550724637" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

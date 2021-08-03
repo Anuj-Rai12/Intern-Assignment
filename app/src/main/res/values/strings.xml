@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">Intern Assigment</string>
+    <string name="app_name">Intern Assignment</string>
+    <string name="inter_home">InternShala</string>
+    <string name="login_home">Login Screen</string>
+    <string name="sign_home">Create Account</string>
+    <string name="student_dash">Dashboard</string>
+
+    <!-- App String-->
+    <string name="user_desc">Find a Skill you want to Acquire</string>
+    <string name="user_name">Hey </string>
+    <string name="total_weeks">%1$d Weeks</string>
+    <string name="app_create_acc">Create Account.</string>
+    <string name="app_email_hint">Email</string>
+    <string name="app_pass_hint">Password</string>
+    <string name="app_remember">Remember Me</string>
+    <string name="app_login_btn">Login</string>
+    <string name="app_sign_btn">Sign Up</string>
+    <string name="please_wait">Please Wait,</string>
+    <string name="apply_now">Apply Now!!</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_num">Phone Number</string>
+    <string name="app_next">Register</string>
 </resources>

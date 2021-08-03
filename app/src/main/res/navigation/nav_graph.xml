@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/workShopFragment">
+    <fragment
+        android:id="@+id/workShopFragment"
+        android:name="com.example.internassigment.fragments.WorkShopFragment"
+        android:label="@string/inter_home"
+        tools:layout="@layout/workshop_fragment" >
+        <action
+            android:id="@+id/action_workShopFragment_to_workShopDash"
+            app:destination="@id/workShopDash"
+            app:enterAnim="@anim/ente_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.example.internassigment.fragments.LoginScreen"
+        android:label="@string/login_home"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginScreen_to_registrationScreen"
+            app:destination="@id/registrationScreen"
+            app:enterAnim="@anim/ente_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationScreen"
+        android:name="com.example.internassigment.fragments.RegistrationScreen"
+        android:label="@string/sign_home"
+        tools:layout="@layout/registration_fragment" />
+    <fragment
+        android:id="@+id/studentDashBoard"
+        android:name="com.example.internassigment.fragments.StudentDashBoard"
+        android:label="@string/student_dash"
+        tools:layout="@layout/student_dashboard_framgent" />
+    <fragment
+        android:id="@+id/workShopDash"
+        android:name="com.example.internassigment.fragments.WorkShopDash"
+        android:label="{title}"
+        tools:layout="@layout/work_shop_dash_fragment" >
+        <action
+            android:id="@+id/action_workShopDash_to_loginScreen"
+            app:destination="@id/loginScreen"
+            app:enterAnim="@anim/ente_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Working" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_studentDashBoard"
+        app:destination="@id/studentDashBoard"
+        app:enterAnim="@anim/ente_anim"
+        app:exitAnim="@anim/exit_anim"
+        app:popEnterAnim="@anim/pop_enter_anim"
+        app:popExitAnim="@anim/pop_exit_anim" />
+    <dialog
+        android:id="@+id/dialog"
+        android:name="com.example.internassigment.utils.MyDialog"
+        android:label="Dialog">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
+    <action android:id="@+id/action_global_dialog" app:destination="@id/dialog" />
+</navigation>

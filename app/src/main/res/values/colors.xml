@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Android App is Here -->
+    <color name="my_primary">#C5C5C5</color>
+    <color name="my_Variant">#FF6D00</color>
+    <color name="my_snow">#FFFAFA</color>
+    <color name="my_linkType_color">#8686E3</color>
+    <color name="user_desc_color">#827E7E</color>
+    <color name="card_color">#FCF6F5FF</color>
+    <!-- Color Screen -->
+    <color name="cheery_red">#ee5c3f</color>
+    <color name="color_red">#D50000</color>
+    <color name="trans_parent_btn_color">#00000000</color>
 </resources>
