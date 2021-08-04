@@ -23,7 +23,7 @@
         android:id="@+id/users_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@string/user_desc"
+        android:text="@string/user_desc"
         android:layout_margin="5dp"
         android:textSize="16sp"
         android:textColor="@color/user_desc_color"

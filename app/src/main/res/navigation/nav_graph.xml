@@ -56,6 +56,9 @@
             android:name="title"
             app:argType="string"
             android:defaultValue="Working" />
+        <argument
+            android:name="course"
+            app:argType="com.example.internassigment.data.CourseName" />
     </fragment>
     <action
         android:id="@+id/action_global_studentDashBoard"

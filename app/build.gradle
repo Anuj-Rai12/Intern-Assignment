@@ -5,6 +5,7 @@ plugins {
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs.kotlin")
+    id 'com.google.gms.google-services'
 }
 android {
     compileSdk 30
@@ -72,8 +73,20 @@ dependencies {
     //Room
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    // kapt "android.arch.persistence.room:compiler:1.1.1"
     //Lottie
     implementation 'com.airbnb.android:lottie:3.7.2'
     //Code Picker
     implementation 'com.hbb20:ccp:2.4.5'
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+    //FireBase Set Up
+    implementation platform('com.google.firebase:firebase-bom:28.3.0')
+    //FireBase Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    //FireBase Kotlin Coroutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$firebase_bg")
+
+    //FireBase Auth
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
 }

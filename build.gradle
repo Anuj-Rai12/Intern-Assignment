@@ -8,6 +8,7 @@ buildscript {
     ext.jetpack_data_store = "1.0.0-rc02"
     ext.multidex_version = "2.0.1"
     ext.room_version = "2.3.0"
+    ext.firebase_bg="1.5.0"
     repositories {
         google()
         mavenCentral()
@@ -19,6 +20,8 @@ buildscript {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
         //Dagger Hilt ClassPath
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        //FireBase
+        classpath 'com.google.gms:google-services:4.3.8'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
