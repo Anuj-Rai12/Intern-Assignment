@@ -8,7 +8,7 @@
         android:id="@+id/workShopFragment"
         android:name="com.example.internassigment.fragments.WorkShopFragment"
         android:label="@string/inter_home"
-        tools:layout="@layout/workshop_fragment" >
+        tools:layout="@layout/workshop_fragment">
         <action
             android:id="@+id/action_workShopFragment_to_workShopDash"
             app:destination="@id/workShopDash"
@@ -21,7 +21,7 @@
         android:id="@+id/loginScreen"
         android:name="com.example.internassigment.fragments.LoginScreen"
         android:label="@string/login_home"
-        tools:layout="@layout/login_fragment" >
+        tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_loginScreen_to_registrationScreen"
             app:destination="@id/registrationScreen"
@@ -37,7 +37,7 @@
         android:id="@+id/registrationScreen"
         android:name="com.example.internassigment.fragments.RegistrationScreen"
         android:label="@string/sign_home"
-        tools:layout="@layout/registration_fragment" >
+        tools:layout="@layout/registration_fragment">
         <argument
             android:name="course"
             app:argType="com.example.internassigment.data.CourseName" />
@@ -51,7 +51,7 @@
         android:id="@+id/workShopDash"
         android:name="com.example.internassigment.fragments.WorkShopDash"
         android:label="{title}"
-        tools:layout="@layout/work_shop_dash_fragment" >
+        tools:layout="@layout/work_shop_dash_fragment">
         <action
             android:id="@+id/action_workShopDash_to_loginScreen"
             app:destination="@id/loginScreen"
@@ -61,8 +61,8 @@
             app:popExitAnim="@anim/pop_exit_anim" />
         <argument
             android:name="title"
-            app:argType="string"
-            android:defaultValue="Working" />
+            android:defaultValue="Working"
+            app:argType="string" />
         <argument
             android:name="course"
             app:argType="com.example.internassigment.data.CourseName" />
@@ -85,5 +85,21 @@
             android:name="message"
             app:argType="string" />
     </dialog>
-    <action android:id="@+id/action_global_dialog" app:destination="@id/dialog" />
+    <action
+        android:id="@+id/action_global_dialog"
+        app:destination="@id/dialog" />
+    <dialog
+        android:id="@+id/customLog"
+        android:name="com.example.internassigment.utils.CustomLog"
+        android:label="CustomLog" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
+    <action
+        android:id="@+id/action_global_customLog"
+        app:destination="@id/customLog" />
 </navigation>

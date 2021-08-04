@@ -57,6 +57,7 @@ class Repository @Inject constructor() {
 
     fun applyForWork(courseDao: CourseDao, courseName: CourseName) = flow {
         emit(MySealed.Loading("Applying For Work Shop"))
+        kotlinx.coroutines.delay(2000)
         val data = try {
             courseDao.updateCourseInfo(courseName)
             MySealed.Success(null)

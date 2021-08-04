@@ -1,6 +1,8 @@
 package com.example.internassigment.fragments
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,6 +36,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
         binding = StudentDashboardFramgentBinding.bind(view)
         setUpRecycleView()
         getData()
+        setHasOptionsMenu(true)
     }
 
     private fun hideLoading() = customProgress.hideLoading()
@@ -44,7 +47,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
             when (it) {
                 is MySealed.Error -> {
                     hideLoading()
-                    Flag=true
+                    Flag = true
                     dir(
                         title = "Error",
                         message = it.exception?.localizedMessage ?: "UnWanted Error"
@@ -52,7 +55,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
                 }
                 is MySealed.Loading -> showLoading(it.data as String)
                 is MySealed.Success -> {
-                    Flag=true
+                    Flag = true
                     hideLoading()
                     val sqlData = it.data as MutableList<*>
                     setData(sqlData)
@@ -102,5 +105,19 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
             message = message
         )
         findNavController().navigate(action)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.logout_menu, menu)
+        val log = menu.findItem(R.id.logout_btn)
+        log.setOnMenuItemClickListener {
+            val action = StudentDashBoardDirections.actionGlobalCustomLog(
+                title = "Log Out!!",
+                getString(R.string.Log_out_msg)
+            )
+            findNavController().navigate(action)
+            return@setOnMenuItemClickListener true
+        }
     }
 }

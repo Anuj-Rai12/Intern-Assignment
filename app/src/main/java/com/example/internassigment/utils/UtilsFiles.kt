@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.navArgs
 import com.example.internassigment.R
 import com.example.internassigment.data.WhyChoose
+import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Pattern
 import javax.inject.Inject
 import kotlin.random.Random
@@ -23,6 +24,23 @@ class MyDialog :
         val alterDialog = AlertDialog.Builder(requireActivity()).setTitle(args.title)
         alterDialog.setMessage(args.message)
             .setPositiveButton("ok") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+        return alterDialog.create()
+    }
+}
+
+class CustomLog :
+    androidx.fragment.app.DialogFragment() {
+        private val args: CustomLogArgs by navArgs()
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val alterDialog = AlertDialog.Builder(requireActivity()).setTitle(args.title)
+        alterDialog.setMessage(args.message)
+            .setPositiveButton("LogOut") {_, _ ->
+                FirebaseAuth.getInstance().signOut()
+                activity?.finish()
+            }
+            .setNegativeButton("Cancel") { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }
         return alterDialog.create()
@@ -68,6 +86,7 @@ fun isValidPassword(password: String): Boolean {
     )
     return passwordREGEX.matcher(password).matches()
 }
+
 fun rand(from: Int = 1, to: Int = 30): Int {
     return Random.nextInt(to - from) + from
 }
@@ -293,129 +312,153 @@ object WebSite {
         const val desc = "Be it rain or sunshine, coding is always on your mind."
     }
 }
-object HackingCourse{
+
+object HackingCourse {
     object One {
         const val title = "Because It Fun"
-        const val desc = "Explore different design concepts endlessly, create your own website to sell your art, or work for a design studio - the possibilities are endless!"
+        const val desc =
+            "Explore different design concepts endlessly, create your own website to sell your art, or work for a design studio - the possibilities are endless!"
     }
 
     object Two {
         const val title = "Be in Demand"
-        const val desc = "With the entire world and its data coming online, the demand for cyberSecurity experts is skyrocketing."
+        const val desc =
+            "With the entire world and its data coming online, the demand for cyberSecurity experts is skyrocketing."
     }
 
     object Three {
         const val title = "Lucrative Salary"
-        const val desc = "The average salary of a CyberSecurity Analyst is 6.8 LPA+ according to Indeed."
+        const val desc =
+            "The average salary of a CyberSecurity Analyst is 6.8 LPA+ according to Indeed."
     }
 }
 
-object DigitalArtCourse{
+object DigitalArtCourse {
     object One {
         const val title = "Freedom"
-        const val desc = "Explore different design concepts endlessly, create your own website to sell your art, or work for a design studio - the possibilities are endless!"
+        const val desc =
+            "Explore different design concepts endlessly, create your own website to sell your art, or work for a design studio - the possibilities are endless!"
     }
 
     object Two {
         const val title = "Easy on the pocket"
-        const val desc = "No need to invest in high quality brushes, paints, inks, and paper that need to be replenished every time. Digital art is way cheaper than traditional art!"
+        const val desc =
+            "No need to invest in high quality brushes, paints, inks, and paper that need to be replenished every time. Digital art is way cheaper than traditional art!"
     }
 
     object Three {
         const val title = "Art is your whole world"
-        const val desc = "From studying the works of greats like Picasso and Van Gogh to day dreaming about your next creation, art is life, and life is art."
+        const val desc =
+            "From studying the works of greats like Picasso and Van Gogh to day dreaming about your next creation, art is life, and life is art."
     }
 }
-object UiUxCourse{
+
+object UiUxCourse {
     object One {
         const val title = "Design The Future"
-        const val desc = "Be it the next Snapchat, smartwatch, self-driving cars, virtual reality apps, or drone deliveries - UI/UX designers are shaping the future."
+        const val desc =
+            "Be it the next Snapchat, smartwatch, self-driving cars, virtual reality apps, or drone deliveries - UI/UX designers are shaping the future."
     }
 
     object Two {
         const val title = "Help the world"
-        const val desc = "Design is not just how it looks. Design is how it works. UI/UX designers make the world a better place - one app at a time."
+        const val desc =
+            "Design is not just how it looks. Design is how it works. UI/UX designers make the world a better place - one app at a time."
     }
 
     object Three {
         const val title = "Lucrative Salary"
-        const val desc = "No wonder, the average salary for a UI/UX designer is 9 LPA+ according to GlassDoor."
+        const val desc =
+            "No wonder, the average salary for a UI/UX designer is 9 LPA+ according to GlassDoor."
     }
 }
 
-object AutoCADCourse{
+object AutoCADCourse {
     object One {
         const val title = "The most widely used CAD software"
-        const val desc = "Since its launch in 1982, AutoCAD is the most widely used CAD software by engineers, architects, interior designers, etc."
+        const val desc =
+            "Since its launch in 1982, AutoCAD is the most widely used CAD software by engineers, architects, interior designers, etc."
     }
 
     object Two {
         const val title = "Design the next BMW or Burj Khalifa"
-        const val desc = "Whether you like numbers, or wordplay, or designing things; digital marketing offers a heady mix of creativity for everyone."
+        const val desc =
+            "Whether you like numbers, or wordplay, or designing things; digital marketing offers a heady mix of creativity for everyone."
     }
 
     object Three {
         const val title = "Design quickly edit easily"
-        const val desc = "Become a pro at design. Creating and editing designs in AutoCAD is quick and hassle free."
+        const val desc =
+            "Become a pro at design. Creating and editing designs in AutoCAD is quick and hassle free."
     }
 }
 
 
-object DigitalMarketing{
+object DigitalMarketing {
     object One {
         const val title = "Take your idea to millions"
-        const val desc = "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
+        const val desc =
+            "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
     }
 
     object Two {
         const val title = "Channel your Creativity"
-        const val desc = "Whether you like numbers, or wordplay, or designing things; digital marketing offers a heady mix of creativity for everyone."
+        const val desc =
+            "Whether you like numbers, or wordplay, or designing things; digital marketing offers a heady mix of creativity for everyone."
     }
 
     object Three {
         const val title = "Be in demand digital market"
-        const val desc = "Digital marketing is one of the hottest career options these days with thousands of internships and jobs being added everyday."
+        const val desc =
+            "Digital marketing is one of the hottest career options these days with thousands of internships and jobs being added everyday."
     }
 }
 
-object GitGitHubCourse{
+object GitGitHubCourse {
     object One {
         const val title = "A developer best friend"
-        const val desc = "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
+        const val desc =
+            "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
     }
 
     object Two {
         const val title = "Powerful community"
-        const val desc = "Host your code online, meet other developers, ask questions and more on GitHub - the largest host of source code in the world!"
+        const val desc =
+            "Host your code online, meet other developers, ask questions and more on GitHub - the largest host of source code in the world!"
     }
 
     object Three {
         const val title = "Be in demand"
-        const val desc = "Google, Amazon, Microsoft, and other companies around the world use Git and GitHub for collaboration. So, if you know Git and GitHub, consider yourself a cut above the rest!"
+        const val desc =
+            "Google, Amazon, Microsoft, and other companies around the world use Git and GitHub for collaboration. So, if you know Git and GitHub, consider yourself a cut above the rest!"
     }
 }
 
-object WhyPythonCourse{
+object WhyPythonCourse {
     object One {
         const val title = "Versatility"
-        const val desc = "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
+        const val desc =
+            "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
     }
 
     object Two {
         const val title = "Beginner friendly"
-        const val desc = "A simple and powerful syntax makes Python one of the easiest languages to learn."
+        const val desc =
+            "A simple and powerful syntax makes Python one of the easiest languages to learn."
     }
 
     object Three {
         const val title = "Be in Demand"
-        const val desc = "Python is the fastest growing language according to Stack Overflow with an average fresher salary of 5 LPA+ according to GlassDoor."
+        const val desc =
+            "Python is the fastest growing language according to Stack Overflow with an average fresher salary of 5 LPA+ according to GlassDoor."
     }
 }
 
-object WhyStartUpCourse{
+object WhyStartUpCourse {
     object One {
         const val title = "Be your own boss"
-        const val desc = "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
+        const val desc =
+            "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
     }
 
     object Two {
@@ -425,6 +468,7 @@ object WhyStartUpCourse{
 
     object Three {
         const val title = "Always Follow your own Heart"
-        const val desc = "And make a difference! There is no better feeling than working on something that makes you happy."
+        const val desc =
+            "And make a difference! There is no better feeling than working on something that makes you happy."
     }
 }
