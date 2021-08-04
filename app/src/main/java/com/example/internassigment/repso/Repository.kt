@@ -22,7 +22,7 @@ class Repository @Inject constructor() {
         val data = try {
             val courseName = courseDao.getCourseInfo()
             val listOf = mutableListOf<AllData>()
-            listOf.add(AllData.Users(User(0, "Hey Friend", "", "", "", "")))
+            listOf.add(AllData.Users(User(0, "Friend", "", "", "", "")))
             courseName.forEach { course ->
                 listOf.add(AllData.Course(course))
             }

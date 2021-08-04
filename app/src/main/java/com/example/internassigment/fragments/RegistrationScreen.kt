@@ -91,10 +91,12 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
     private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)
 
     private fun createUserAccount(user: User) {
+        myViewModel.mutableStateFlow.value=user
         myViewModel.createUsers(user = user, courseName = args.course).observe(viewLifecycleOwner) {
             when (it) {
                 is MySealed.Error -> {
                     hideLoading()
+                    myViewModel.mutableStateFlow.value=null
                     dir(message = it.exception?.localizedMessage ?: "UnWanted Error")
                 }
                 is MySealed.Loading -> {
@@ -102,6 +104,7 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
                 }
                 is MySealed.Success -> {
                     hideLoading()
+                    myViewModel.mutableStateFlow.value=null
                     dir(choose = 3)
                 }
             }
@@ -128,13 +131,5 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
         findNavController().navigate(action)
     }
 
-    private fun msg() = "The Good Password Must contain Following thing ;) :- \n\n" +
-            "1.At least 1 digit i.e [0-9]\n" +
-            "2.At least 1 lower case letter i.e [a-z]\n" +
-            "3.At least 1 upper case letter i.e [A-Z]\n" +
-            "4.Any letter i.e [A-Z,a-z]\n" +
-            "5.At least 1 special character i.e [%^*!&*|)(%#$%]\n" +
-            "6.No white spaces\n" +
-            "7.At Least 8 Character\n"
 
 }

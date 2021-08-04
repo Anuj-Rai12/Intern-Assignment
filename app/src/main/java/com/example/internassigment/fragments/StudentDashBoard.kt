@@ -79,7 +79,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
         binding.studentSelectedCourse.apply {
             workShopRecycleView = WorkShopRecycleView { CourseName ->
                 val message =
-                    "You have Successfully Applied for ${CourseName.courseName}\n Duration : ${CourseName.week} Week long."
+                    "You have Successfully Applied for ${CourseName.courseName}\nDuration : ${CourseName.week} Week long."
                 dir(title = "Applied", message = message)
             }
             val courseLayoutManager = GridLayoutManager(activity, 2)

@@ -1,6 +1,7 @@
 package com.example.internassigment.recycle
 
 import android.animation.Animator
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +20,13 @@ import com.example.internassigment.utils.web
 
 sealed class AllViewHolder(viewBinding: ViewBinding) : RecyclerView.ViewHolder(viewBinding.root) {
     class UserInfo(private val binding: UserDescLayoutBinding) : AllViewHolder(binding) {
+        @SuppressLint("SetTextI18n")
         fun bindIt(users: AllData.Users) {
-            binding.userTitle.text = users.user.firstname
+            binding.userTitle.text = "Hey ${users.user.firstname},"
+            if (users.user.firstname!="Friend"){
+                binding.usersDescription.text=binding.usersDescription.context.getString(R.string.another_user_desc)
+            }
+            Log.i(TAG, "bindIt: Password ->${users.user.password}\n Email -> ${users.user.email}")
         }
 
         fun bindItDash(whyChoose: WhyChoose) {

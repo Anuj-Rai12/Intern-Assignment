@@ -35,6 +35,15 @@ fun isValidPhone(phone: String): Boolean {
     return pattern.matcher(phone).matches()
 }
 
+fun msg() = "The Good Password Must contain Following thing ;) :- \n\n" +
+        "1.At least 1 digit i.e [0-9]\n" +
+        "2.At least 1 lower case letter i.e [a-z]\n" +
+        "3.At least 1 upper case letter i.e [A-Z]\n" +
+        "4.Any letter i.e [A-Z,a-z]\n" +
+        "5.At least 1 special character i.e [%^*!&*|)(%#$%]\n" +
+        "6.No white spaces\n" +
+        "7.At Least 8 Character\n"
+
 fun isValidEmail(target: CharSequence?): Boolean {
     return if (target == null) {
         false
