@@ -46,7 +46,6 @@ class AuthRepository @Inject constructor(
     ) = flow {
         emit(MySealed.Loading("Validating User Details.."))
         val data = try {
-            kotlinx.coroutines.delay(20000)
             firebaseAuth.signInWithEmailAndPassword(email, password).await()
             val userInfo = userDao.getSignedInfo(email, pass = password)
             courseDao.updateCourseInfo(courseName)
