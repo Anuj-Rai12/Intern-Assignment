@@ -12,6 +12,7 @@ import com.example.internassigment.repso.Repository
 import com.example.internassigment.utils.SharePreference
 import com.example.internassigment.utils.UserStore
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,10 +24,15 @@ class MyViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val sharePreference: SharePreference
 ) : ViewModel() {
+    var mutableStateFlow = MutableStateFlow<User?>(null)
+
     fun getAllCourse() = repository.getAllCourse(courseDao).asLiveData()
     fun getAllUsers() = repository.getAllUsers(userDao, courseDao).asLiveData()
 
-    fun createUsers(user: User) = authRepository.createUserRecord(userDao, user)
+    fun createUsers(user: User, courseName: CourseName) =
+        authRepository.createUserRecord(userDao, user, courseDao, courseName = courseName)
+            .asLiveData()
+
     fun applyForWork(courseName: CourseName) =
         repository.applyForWork(courseDao = courseDao, courseName = courseName).asLiveData()
 

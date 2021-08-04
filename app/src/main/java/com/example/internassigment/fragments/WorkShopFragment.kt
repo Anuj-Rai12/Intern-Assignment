@@ -16,6 +16,7 @@ import com.example.internassigment.utils.CustomProgress
 import com.example.internassigment.utils.MySealed
 import com.example.internassigment.utils.TAG
 import com.example.internassigment.viewmodle.MyViewModel
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,7 +38,7 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
 
     private fun setUpRecycleView() {
         binding.allWorkShops.apply {
-            workShopRecycleView = WorkShopRecycleView {CourseName->
+            workShopRecycleView = WorkShopRecycleView { CourseName ->
                 dir(2, courseName = CourseName)
             }
             val courseLayoutManager = GridLayoutManager(activity, 2)
@@ -83,6 +84,16 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
             allData.add(all)
         }
         workShopRecycleView?.submitList(allData)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FirebaseAuth.getInstance().currentUser?.let {
+            if (StudentDashBoard.Flag == null) {
+                val action = WorkShopFragmentDirections.actionGlobalStudentDashBoard()
+                findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onPause() {

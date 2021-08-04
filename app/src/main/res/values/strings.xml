@@ -21,4 +21,10 @@
     <string name="last_name">Last Name</string>
     <string name="phone_num">Phone Number</string>
     <string name="app_next">Register</string>
+
+    <!-- Sign Up Screen -->
+    <string name="wrong_detail">Pleas,Enter the Correct Info</string>
+    <string name="wrong_email">Please,Enter the Correct Email</string>
+    <string name="wrong_password">Password is Weak :( </string>
+    <string name="wrong_phone">Please,Enter the Correct Phone Number</string>
 </resources>

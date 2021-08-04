@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding
 import com.example.internassigment.R
 import com.example.internassigment.data.AllData
 import com.example.internassigment.data.CourseName
+import com.example.internassigment.data.WhyChoose
 import com.example.internassigment.databinding.SubjectItemBinding
 import com.example.internassigment.databinding.UserDescLayoutBinding
 import com.example.internassigment.utils.TAG
@@ -20,6 +21,11 @@ sealed class AllViewHolder(viewBinding: ViewBinding) : RecyclerView.ViewHolder(v
     class UserInfo(private val binding: UserDescLayoutBinding) : AllViewHolder(binding) {
         fun bindIt(users: AllData.Users) {
             binding.userTitle.text = users.user.firstname
+        }
+
+        fun bindItDash(whyChoose: WhyChoose) {
+            binding.userTitle.text = whyChoose.title
+            binding.usersDescription.text = whyChoose.description
         }
     }
 

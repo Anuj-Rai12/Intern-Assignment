@@ -5,10 +5,12 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Patterns
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.navArgs
 import com.example.internassigment.R
 import com.example.internassigment.data.WhyChoose
+import java.util.regex.Pattern
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -27,6 +29,36 @@ class MyDialog :
     }
 }
 
+fun isValidPhone(phone: String): Boolean {
+    val phonetic = "^[+]?[0-9]{10,13}\$"
+    val pattern = Pattern.compile(phonetic)
+    return pattern.matcher(phone).matches()
+}
+
+fun isValidEmail(target: CharSequence?): Boolean {
+    return if (target == null) {
+        false
+    } else {
+        Patterns.EMAIL_ADDRESS.matcher(target).matches()
+    }
+}
+
+fun checkFieldValue(string: String) = string.isEmpty() || string.isBlank()
+
+fun isValidPassword(password: String): Boolean {
+    val passwordREGEX = Pattern.compile(
+        "^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{8,}" +               //at least 8 characters
+                "$"
+    )
+    return passwordREGEX.matcher(password).matches()
+}
 fun rand(from: Int = 1, to: Int = 30): Int {
     return Random.nextInt(to - from) + from
 }

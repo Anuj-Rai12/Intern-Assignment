@@ -19,11 +19,17 @@ class AuthRepository @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val user: FirebaseUser?
 ) {
-    fun createUserRecord(userDao: UserDao, user: User) = flow {
+    fun createUserRecord(
+        userDao: UserDao,
+        user: User,
+        courseDao: CourseDao,
+        courseName: CourseName
+    ) = flow {
         emit(MySealed.Loading("User Profile is Creating..."))
         val data = try {
             firebaseAuth.createUserWithEmailAndPassword(user.email, user.password).await()
             userDao.insertUser(user)
+            courseDao.updateCourseInfo(courseName)
             MySealed.Success(null)
         } catch (e: Exception) {
             MySealed.Error(null, e)
