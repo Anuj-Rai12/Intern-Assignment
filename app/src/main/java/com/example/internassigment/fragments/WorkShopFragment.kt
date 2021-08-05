@@ -31,7 +31,6 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = WorkshopFragmentBinding.bind(view)
-        Log.i(TAG, "onViewCreated: Hello from WorkShop")
         setUpRecycleView()
         getAllWorkShop()
     }
@@ -71,6 +70,7 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
                 is MySealed.Success -> {
                     hideLoading()
                     val sqlData = it.data as MutableList<*>
+                    Log.i(TAG, "getAllWorkShop: $sqlData")
                     setData(sqlData)
                 }
             }
@@ -83,6 +83,7 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
             val all = it as AllData
             allData.add(all)
         }
+        //Log.i(TAG, "setData: $allData")
         workShopRecycleView?.submitList(allData)
     }
 

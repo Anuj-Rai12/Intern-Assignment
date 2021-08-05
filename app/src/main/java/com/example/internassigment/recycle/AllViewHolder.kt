@@ -12,26 +12,39 @@ import androidx.viewbinding.ViewBinding
 import com.example.internassigment.R
 import com.example.internassigment.data.AllData
 import com.example.internassigment.data.CourseName
-import com.example.internassigment.data.WhyChoose
 import com.example.internassigment.databinding.SubjectItemBinding
 import com.example.internassigment.databinding.UserDescLayoutBinding
 import com.example.internassigment.utils.TAG
-import com.example.internassigment.utils.web
 
 sealed class AllViewHolder(viewBinding: ViewBinding) : RecyclerView.ViewHolder(viewBinding.root) {
     class UserInfo(private val binding: UserDescLayoutBinding) : AllViewHolder(binding) {
         @SuppressLint("SetTextI18n")
         fun bindIt(users: AllData.Users) {
             binding.userTitle.text = "Hey ${users.user.firstname},"
-            if (users.user.firstname!="Friend"){
-                binding.usersDescription.text=binding.usersDescription.context.getString(R.string.another_user_desc)
+            if (users.user.firstname != "Friend") {
+                binding.usersDescription.text =
+                    binding.usersDescription.context.getString(R.string.another_user_desc)
             }
             Log.i(TAG, "bindIt: Password ->${users.user.password}\n Email -> ${users.user.email}")
         }
 
-        fun bindItDash(whyChoose: WhyChoose) {
-            binding.userTitle.text = whyChoose.title
-            binding.usersDescription.text = whyChoose.description
+        @SuppressLint("SetTextI18n")
+        fun bindItDash(whyChoose: AllData.Users) {
+            if (whyChoose.user.firstname == whyChoose.user.lastname) {
+                val str = "Learn\n${whyChoose.user.firstname}"
+                binding.userTitle.text = "Why to $str?"
+                binding.usersDescription.hide()
+            } else {
+                binding.userTitle.text = whyChoose.user.firstname
+                binding.usersDescription.text = whyChoose.user.lastname
+            }
+        }
+        @SuppressLint("SetTextI18n")
+        fun courseDesc(whyChoose: AllData.Course) {
+            binding.userTitle.text = "Learn\n${whyChoose.courseName.courseName}."
+            binding.usersDescription.hide()
+            binding.CoursesImage.show()
+            binding.CoursesImage.setAnimation(whyChoose.courseName.thumbnails)
         }
     }
 
@@ -57,7 +70,6 @@ sealed class AllViewHolder(viewBinding: ViewBinding) : RecyclerView.ViewHolder(v
                         CourseName.show()
                         totalCourse.show()
                         myLottieImageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
-                        getImage(subjectInfo.courseName.courseName)
                     }
 
                     override fun onAnimationCancel(animation: Animator?) {
@@ -89,12 +101,6 @@ sealed class AllViewHolder(viewBinding: ViewBinding) : RecyclerView.ViewHolder(v
             }
         }
 
-        private fun getImage(data: String) = if (data == web) {
-            binding.myLottieImageView.setImageResource(IMAGE)
-            true
-        } else
-            false
-
         private fun isEven(position: Int) = position % 2 == 0
     }
 }
@@ -108,5 +114,3 @@ fun View.hide() {
 fun View.show() {
     this.isVisible = true
 }
-
-const val IMAGE = R.drawable.hand_image

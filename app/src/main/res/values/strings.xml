@@ -6,7 +6,7 @@
     <string name="student_dash">Dashboard</string>
 
     <!-- App String-->
-    <string name="user_desc">Find a Skill you want to Acquire</string>
+    <string name="user_desc">Find a Skill you want to Acquire.</string>
     <string name="another_user_desc">Find all the Skill for which you had Applied.</string>
     <string name="user_name">Hey </string>
     <string name="total_weeks">%1$d Weeks</string>

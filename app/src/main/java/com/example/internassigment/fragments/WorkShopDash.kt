@@ -9,7 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.internassigment.R
+import com.example.internassigment.data.AllData
 import com.example.internassigment.data.CourseName
+import com.example.internassigment.data.User
 import com.example.internassigment.databinding.WorkShopDashFragmentBinding
 import com.example.internassigment.recycle.workdashrecycle.WorkDashRecycle
 import com.example.internassigment.utils.CustomProgress
@@ -44,12 +46,13 @@ class WorkShopDash : Fragment(R.layout.work_shop_dash_fragment) {
         if (dialogFlag == true) {
             applyForWork(args.course)
         }
-        binding.CoursesImage.setAnimation(args.course.thumbnails)
+        /*binding.CoursesImage.setAnimation(args.course.thumbnails)
         val str = "Learn\n" + args.title
         binding.courseTitle.text = str
-        binding.whyThisCourse.text = "Why to $str?"
+        binding.whyThisCourse.text = "Why to $str?"*/
         setRecyclerview()
-        workDashRecycle.submitList(args.course.whyChoose)
+        /*args.course.whyChoose*/
+        setData()
         binding.applyWorkShop.setOnClickListener {
             args.course.also { courseName ->
                 CourseName(
@@ -64,7 +67,7 @@ class WorkShopDash : Fragment(R.layout.work_shop_dash_fragment) {
                         applyForWork(name)
                         return@setOnClickListener
                     }
-                    dir(23,courseName = name)
+                    dir(23, courseName = name)
                 }
             }
         }
@@ -74,11 +77,11 @@ class WorkShopDash : Fragment(R.layout.work_shop_dash_fragment) {
     private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)
 
     private fun applyForWork(courseName: CourseName) {
-        dialogFlag=true
+        dialogFlag = true
         myViewModel.applyForWork(courseName).observe(viewLifecycleOwner) {
             when (it) {
                 is MySealed.Error -> {
-                    dialogFlag=false
+                    dialogFlag = false
                     hideLoading()
                     dir(
                         title = "Error",
@@ -89,7 +92,7 @@ class WorkShopDash : Fragment(R.layout.work_shop_dash_fragment) {
                     showLoading(it.data as String)
                 }
                 is MySealed.Success -> {
-                    dialogFlag=false
+                    dialogFlag = false
                     hideLoading()
                     dir(1)
                 }
@@ -122,6 +125,33 @@ class WorkShopDash : Fragment(R.layout.work_shop_dash_fragment) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = workDashRecycle
         }
+    }
+
+    private fun setData() {
+        val allData = mutableListOf<AllData>()
+        val user = User(
+            0,
+            firstname = args.title,
+            lastname = args.title,
+            email = "",
+            password = "",
+            phone = ""
+        )
+        allData.add(AllData.Course(args.course))
+        allData.add(AllData.Users(user))
+        args.course.whyChoose?.filterIndexed { index, whyChoose ->
+            val userDesc = User(
+                id = index,
+                firstname = whyChoose.title,
+                lastname = whyChoose.description,
+                email = "",
+                password = "",
+                phone = ""
+            )
+            allData.add(AllData.Users(userDesc))
+            return@filterIndexed true
+        }
+        workDashRecycle.submitList(allData)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

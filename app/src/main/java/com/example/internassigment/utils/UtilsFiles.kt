@@ -131,8 +131,8 @@ class UtilsFiles {
                 digital_Art to R.raw.arts,
                 Ui_Ux_Design to R.raw.design,
                 Auto_cad to R.raw.arthitecture,
-                digitalMarket to R.raw.catogary_seven,
-                GitAndGithub to R.raw.categroy_eight,
+                digitalMarket to R.raw.categroy_eight,
+                GitAndGithub to R.raw.catogary_seven,
                 How_to_Start to R.raw.catogroy_nine,
                 Python to R.raw.catogroy_ten
             )
@@ -458,7 +458,7 @@ object WhyStartUpCourse {
     object One {
         const val title = "Be your own boss"
         const val desc =
-            "Machine Learning, AI, Web Development, Hacking, IoT, and more. Python is used everywhere."
+            "You take risks, you call the shots, and you decide how you want to work. You are truly in control of your own destiny!"
     }
 
     object Two {
