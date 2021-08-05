@@ -104,11 +104,16 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
                 }
                 is MySealed.Success -> {
                     hideLoading()
-                    myViewModel.mutableStateFlow.value=null
-                    dir(choose = 3)
+                    setUpDir(email = user.email,password = user.password)
                 }
             }
         }
+    }
+
+    private fun setUpDir(email:String,password:String) {
+        myViewModel.alwaysRememberMe(UserStore(email,password,flag = false))
+        myViewModel.mutableStateFlow.value=null
+        dir(choose = 3)
     }
 
     override fun onPause() {
@@ -130,6 +135,4 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
         }
         findNavController().navigate(action)
     }
-
-
 }

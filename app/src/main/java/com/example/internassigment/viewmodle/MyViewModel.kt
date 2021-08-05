@@ -25,9 +25,11 @@ class MyViewModel @Inject constructor(
     private val sharePreference: SharePreference
 ) : ViewModel() {
     var mutableStateFlow = MutableStateFlow<User?>(null)
-    var orientationFlag:Boolean?=null
+    var orientationFlag: Boolean? = null
     fun getAllCourse() = repository.getAllCourse(courseDao).asLiveData()
-    fun getAllUsers() = repository.getAllUsers(userDao, courseDao).asLiveData()
+
+    fun getAllUsers(email: String, password: String) =
+        repository.getAllUsers(email, password, userDao, courseDao).asLiveData()
 
     fun createUsers(user: User, courseName: CourseName) =
         authRepository.createUserRecord(userDao, user, courseDao, courseName = courseName)
@@ -38,7 +40,6 @@ class MyViewModel @Inject constructor(
 
     fun signInUsers(email: String, password: String, courseName: CourseName) =
         authRepository.signInUser(
-            userDao = userDao,
             courseName = courseName,
             courseDao = courseDao,
             email = email,

@@ -36,6 +36,7 @@ sealed class AllViewHolder(viewBinding: ViewBinding) : RecyclerView.ViewHolder(v
                 binding.usersDescription.hide()
             } else {
                 binding.userTitle.text = whyChoose.user.firstname
+                binding.userTitle.textSize=20.toFloat()
                 binding.usersDescription.text = whyChoose.user.lastname
             }
         }

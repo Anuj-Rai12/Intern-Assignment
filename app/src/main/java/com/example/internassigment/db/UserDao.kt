@@ -11,9 +11,6 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
-    @Query("select * from USERS_INFO")
-    suspend fun getUserInfo():List<User>
-
     @Query("select * from USERS_INFO where email Like:email and password Like:pass")
     suspend fun getSignedInfo(email:String,pass:String):List<User>
 }

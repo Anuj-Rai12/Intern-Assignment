@@ -41,8 +41,6 @@ object MyModule {
     @Provides
     fun auth() = FirebaseAuth.getInstance()
 
-    @Provides
-    fun getCurrentUser(firebaseAuth: FirebaseAuth) = firebaseAuth.currentUser
 
     @ApplicationContextDb
     @Singleton

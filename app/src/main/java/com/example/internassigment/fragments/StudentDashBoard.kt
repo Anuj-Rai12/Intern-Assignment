@@ -15,6 +15,7 @@ import com.example.internassigment.databinding.StudentDashboardFramgentBinding
 import com.example.internassigment.recycle.WorkShopRecycleView
 import com.example.internassigment.utils.CustomProgress
 import com.example.internassigment.utils.MySealed
+import com.example.internassigment.utils.TAG
 import com.example.internassigment.viewmodle.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,15 +37,22 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
         super.onViewCreated(view, savedInstanceState)
         binding = StudentDashboardFramgentBinding.bind(view)
         setUpRecycleView()
-        getData()
+        myViewModel.rememberMe.observe(viewLifecycleOwner){
+            Log.i(TAG, "onViewCreated: Form Student Section Email -> ${it.email}\nPassword ${it.password}")
+            getData(it.email,it.password)
+            Log.i(TAG, "onViewCreated: Flag in Remember Me -> $Flag")
+            if (Flag==true){
+                hideLoading()
+            }
+        }
         setHasOptionsMenu(true)
     }
 
     private fun hideLoading() = customProgress.hideLoading()
     private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)
 
-    private fun getData() {
-        myViewModel.getAllUsers().observe(viewLifecycleOwner) {
+    private fun getData(email:String,password:String) {
+        myViewModel.getAllUsers(email, password).observe(viewLifecycleOwner) {
             when (it) {
                 is MySealed.Error -> {
                     hideLoading()
@@ -58,6 +66,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
                 is MySealed.Success -> {
                     Flag = true
                     hideLoading()
+                    Log.i(TAG, "getData: Hit to Success iN Student")
                     val sqlData = it.data as MutableList<*>
                     setData(sqlData)
                 }

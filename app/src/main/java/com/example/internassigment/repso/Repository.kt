@@ -31,25 +31,26 @@ class Repository @Inject constructor() {
     }.flowOn(IO)
 
 
-    fun getAllUsers(userDao: UserDao, courseDao: CourseDao) = flow {
-        emit(MySealed.Loading("User Info is Loading..."))
-        kotlinx.coroutines.delay(2000)
-        val data = try {
-            val userInfo = userDao.getUserInfo()
-            val selected = courseDao.getCourseSelectedByUsers()
-            val listOf = mutableListOf<AllData>()
-            userInfo.forEach { user ->
-                listOf.add(AllData.Users(user))
+    fun getAllUsers(email: String, password: String, userDao: UserDao, courseDao: CourseDao) =
+        flow {
+            emit(MySealed.Loading("User Info is Loading..."))
+            kotlinx.coroutines.delay(2000)
+            val data = try {
+                val userInfo = userDao.getSignedInfo(email, pass = password)
+                val selected = courseDao.getCourseSelectedByUsers()
+                val listOf = mutableListOf<AllData>()
+                userInfo.forEach { user ->
+                    listOf.add(AllData.Users(user))
+                }
+                selected.forEach { course ->
+                    listOf.add(AllData.Course(course))
+                }
+                MySealed.Success(listOf)
+            } catch (e: Exception) {
+                MySealed.Error(null, e)
             }
-            selected.forEach { course ->
-                listOf.add(AllData.Course(course))
-            }
-            MySealed.Success(listOf)
-        } catch (e: Exception) {
-            MySealed.Error(null, e)
-        }
-        emit(data)
-    }.flowOn(IO)
+            emit(data)
+        }.flowOn(IO)
 
     fun applyForWork(courseDao: CourseDao, courseName: CourseName) = flow {
         emit(MySealed.Loading("Applying For Work Shop"))

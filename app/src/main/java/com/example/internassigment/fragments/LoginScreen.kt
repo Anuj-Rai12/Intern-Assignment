@@ -31,9 +31,11 @@ class LoginScreen : Fragment(R.layout.login_fragment) {
             signIn(it.email, it.password)
         }
         myViewModel.rememberMe.observe(viewLifecycleOwner) {
-            binding.emailText.setText(it.email)
-            binding.passwordText.setText(it.password)
-            binding.remeberme.isChecked = it.flag
+            if (it.flag) {
+                binding.emailText.setText(it.email)
+                binding.passwordText.setText(it.password)
+                binding.remeberme.isChecked = it.flag
+            }
         }
         binding.signInBtn.setOnClickListener {
             val action = LoginScreenDirections.actionLoginScreenToRegistrationScreen(args.course)
@@ -99,9 +101,7 @@ class LoginScreen : Fragment(R.layout.login_fragment) {
                     }
                     is MySealed.Success -> {
                         hideLoading()
-                        myViewModel.mutableStateFlow.value = null
                         rememberMe(email, pass)
-                        dir(3)
                     }
                 }
             }
@@ -113,6 +113,8 @@ class LoginScreen : Fragment(R.layout.login_fragment) {
             UserStore(email = email, password = pass, flag = flag).also { userStore ->
                 myViewModel.alwaysRememberMe(userStore)
             }
+            myViewModel.mutableStateFlow.value = null
+            dir(3)
         }
     }
 
