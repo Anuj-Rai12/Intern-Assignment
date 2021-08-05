@@ -12,6 +12,8 @@
     <color name="my_primary">#C5C5C5</color>
     <color name="my_Variant">#FF6D00</color>
     <color name="my_snow">#FFFAFA</color>
+    <color name="light_my_color">#F5A59F</color>
+    <color name="my_color">#fb7268</color>
     <color name="my_linkType_color">#8686E3</color>
     <color name="user_desc_color">#827E7E</color>
     <color name="card_color">#FCF6F5FF</color>
