@@ -25,7 +25,7 @@ class MyViewModel @Inject constructor(
     private val sharePreference: SharePreference
 ) : ViewModel() {
     var mutableStateFlow = MutableStateFlow<User?>(null)
-
+    var orientationFlag:Boolean?=null
     fun getAllCourse() = repository.getAllCourse(courseDao).asLiveData()
     fun getAllUsers() = repository.getAllUsers(userDao, courseDao).asLiveData()
 

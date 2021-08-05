@@ -1,6 +1,7 @@
 package com.example.internassigment.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View

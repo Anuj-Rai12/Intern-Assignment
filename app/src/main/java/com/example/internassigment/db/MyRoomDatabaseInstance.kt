@@ -1,5 +1,6 @@
 package com.example.internassigment.db
 
+import android.util.Log
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -7,6 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.internassigment.data.CourseName
 import com.example.internassigment.data.User
 import com.example.internassigment.di.ApplicationContextDb
+import com.example.internassigment.utils.TAG
 import com.example.internassigment.utils.UtilsFiles
 import com.example.internassigment.utils.UtilsFiles.Companion.whyChoose
 import com.example.internassigment.utils.rand
@@ -20,7 +22,6 @@ import javax.inject.Provider
 abstract class MyRoomDatabaseInstance : RoomDatabase() {
     abstract fun getCourseDao(): CourseDao
     abstract fun getUserDao(): UserDao
-
     companion object {
         const val My_Db_Name = "RoomDatabaseName"
     }
@@ -45,7 +46,7 @@ abstract class MyRoomDatabaseInstance : RoomDatabase() {
                         data.insertCourse(courseName)
                     }
                 }
-
+                Log.i(TAG, "onCreate: All Data Submit!!!")
             }
         }
     }
