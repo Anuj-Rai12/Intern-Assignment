@@ -80,7 +80,6 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
             ).also { user ->
                 createUserAccount(user)
             }
-
         }
         binding.signBtn.setOnClickListener {
             findNavController().popBackStack()
@@ -130,7 +129,7 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
                 )
             }
             else -> {
-                RegistrationScreenDirections.actionGlobalStudentDashBoard()
+                RegistrationScreenDirections.actionGlobalStudentDashBoard("don't_loading_screen")
             }
         }
         findNavController().navigate(action)

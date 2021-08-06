@@ -7,7 +7,10 @@ import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.internassigment.R
 import com.example.internassigment.data.AllData
@@ -18,6 +21,8 @@ import com.example.internassigment.utils.MySealed
 import com.example.internassigment.utils.TAG
 import com.example.internassigment.viewmodle.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,7 +30,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
     private lateinit var binding: StudentDashboardFramgentBinding
     private val myViewModel: MyViewModel by viewModels()
     private var workShopRecycleView: WorkShopRecycleView? = null
-
+    private val args:StudentDashBoardArgs by navArgs()
     @Inject
     lateinit var customProgress: CustomProgress
 
@@ -36,25 +41,25 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = StudentDashboardFramgentBinding.bind(view)
-        setUpRecycleView()
-        myViewModel.rememberMe.observe(viewLifecycleOwner){
-            Log.i(TAG, "onViewCreated: Form Student Section Email -> ${it.email}\nPassword ${it.password}")
-            getData(it.email,it.password)
-            Log.i(TAG, "onViewCreated: Flag in Remember Me -> $Flag")
-            if (Flag==true){
-                hideLoading()
+        hideLoading()
+        lifecycleScope.launch {
+            myViewModel.rememberMe.asFlow().collect {
+                Log.i(TAG, "onViewCreated: ${it.email} and Password -> ${it.password}")
+                getData(it.email, it.password)
             }
         }
+        setUpRecycleView()
         setHasOptionsMenu(true)
     }
 
     private fun hideLoading() = customProgress.hideLoading()
     private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)
 
-    private fun getData(email:String,password:String) {
+    private fun getData(email: String, password: String) {
         myViewModel.getAllUsers(email, password).observe(viewLifecycleOwner) {
             when (it) {
                 is MySealed.Error -> {
+                    if (args.regflag.isNullOrEmpty())
                     hideLoading()
                     Flag = true
                     dir(
@@ -62,10 +67,14 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
                         message = it.exception?.localizedMessage ?: "UnWanted Error"
                     )
                 }
-                is MySealed.Loading -> showLoading(it.data as String)
+                is MySealed.Loading -> {
+                    if (args.regflag.isNullOrEmpty())
+                     showLoading(it.data as String)
+                }
                 is MySealed.Success -> {
-                    Flag = true
+                    if (args.regflag.isNullOrEmpty())
                     hideLoading()
+                    Flag = true
                     Log.i(TAG, "getData: Hit to Success iN Student")
                     val sqlData = it.data as MutableList<*>
                     setData(sqlData)

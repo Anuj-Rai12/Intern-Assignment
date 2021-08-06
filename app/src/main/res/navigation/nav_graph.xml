@@ -46,7 +46,13 @@
         android:id="@+id/studentDashBoard"
         android:name="com.example.internassigment.fragments.StudentDashBoard"
         android:label="@string/student_dash"
-        tools:layout="@layout/student_dashboard_framgent" />
+        tools:layout="@layout/student_dashboard_framgent" >
+        <argument
+            android:name="regflag"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/workShopDash"
         android:name="com.example.internassigment.fragments.WorkShopDash"
