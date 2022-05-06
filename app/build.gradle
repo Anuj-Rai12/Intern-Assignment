@@ -8,12 +8,12 @@ plugins {
     id 'com.google.gms.google-services'
 }
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.internassigment"
         minSdk 21
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -30,22 +30,22 @@ android {
         viewBinding true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
-    compileSdkVersion 30
-    buildToolsVersion '30.0.3'
+    compileSdk 31
+    buildToolsVersion '31.0.0'
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -58,8 +58,8 @@ dependencies {
     //JetPack DataStore
     implementation("androidx.datastore:datastore-preferences:$jetpack_data_store")
     //kotlin coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
@@ -75,11 +75,11 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     // kapt "android.arch.persistence.room:compiler:1.1.1"
     //Lottie
-    implementation 'com.airbnb.android:lottie:3.7.2'
+    implementation 'com.airbnb.android:lottie:5.0.1'
     //Code Picker
     implementation 'com.hbb20:ccp:2.4.5'
     //Gson
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.9.0'
     //FireBase Set Up
     implementation platform('com.google.firebase:firebase-bom:28.3.0')
     //FireBase Analytics
@@ -88,5 +88,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$firebase_bg")
 
     //FireBase Auth
-    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
 }
