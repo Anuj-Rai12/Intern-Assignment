@@ -21,7 +21,6 @@ import com.example.internassigment.utils.MySealed
 import com.example.internassigment.utils.TAG
 import com.example.internassigment.viewmodle.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,7 +29,8 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
     private lateinit var binding: StudentDashboardFramgentBinding
     private val myViewModel: MyViewModel by viewModels()
     private var workShopRecycleView: WorkShopRecycleView? = null
-    private val args:StudentDashBoardArgs by navArgs()
+    private val args: StudentDashBoardArgs by navArgs()
+
     @Inject
     lateinit var customProgress: CustomProgress
 
@@ -41,7 +41,6 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = StudentDashboardFramgentBinding.bind(view)
-        hideLoading()
         lifecycleScope.launch {
             myViewModel.rememberMe.asFlow().collect {
                 Log.i(TAG, "onViewCreated: ${it.email} and Password -> ${it.password}")
@@ -50,17 +49,25 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
         }
         setUpRecycleView()
         setHasOptionsMenu(true)
+        binding.addFloatingBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_studentDashBoard_to_workShopFragment)
+        }
     }
 
     private fun hideLoading() = customProgress.hideLoading()
     private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)
+
+    override fun onResume() {
+        super.onResume()
+        hideLoading()
+    }
 
     private fun getData(email: String, password: String) {
         myViewModel.getAllUsers(email, password).observe(viewLifecycleOwner) {
             when (it) {
                 is MySealed.Error -> {
                     if (args.regflag.isNullOrEmpty())
-                    hideLoading()
+                        hideLoading()
                     Flag = true
                     dir(
                         title = "Error",
@@ -69,11 +76,11 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
                 }
                 is MySealed.Loading -> {
                     if (args.regflag.isNullOrEmpty())
-                     showLoading(it.data as String)
+                        showLoading(it.data as String)
                 }
                 is MySealed.Success -> {
                     if (args.regflag.isNullOrEmpty())
-                    hideLoading()
+                        hideLoading()
                     Flag = true
                     Log.i(TAG, "getData: Hit to Success iN Student")
                     val sqlData = it.data as MutableList<*>

@@ -1,12 +1,13 @@
 package com.example.internassigment
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.internassigment.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +21,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val inflater = navHostFragment.navController.navInflater
+        val graph = inflater.inflate(R.navigation.nav_graph)
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            graph.setStartDestination(R.id.studentDashBoard)
+        } else {
+            graph.setStartDestination(R.id.workShopFragment)
+        }
         navController = navHostFragment.findNavController()
+        navController.setGraph(graph, intent.extras)
         setupActionBarWithNavController(navController)
     }
 

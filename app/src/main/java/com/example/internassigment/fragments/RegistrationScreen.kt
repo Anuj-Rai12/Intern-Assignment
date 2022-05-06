@@ -90,12 +90,12 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
     private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)
 
     private fun createUserAccount(user: User) {
-        myViewModel.mutableStateFlow.value=user
+        myViewModel.mutableStateFlow.value = user
         myViewModel.createUsers(user = user, courseName = args.course).observe(viewLifecycleOwner) {
             when (it) {
                 is MySealed.Error -> {
                     hideLoading()
-                    myViewModel.mutableStateFlow.value=null
+                    myViewModel.mutableStateFlow.value = null
                     dir(message = it.exception?.localizedMessage ?: "UnWanted Error")
                 }
                 is MySealed.Loading -> {
@@ -103,15 +103,15 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
                 }
                 is MySealed.Success -> {
                     hideLoading()
-                    setUpDir(email = user.email,password = user.password)
+                    setUpDir(email = user.email, password = user.password)
                 }
             }
         }
     }
 
-    private fun setUpDir(email:String,password:String) {
-        myViewModel.alwaysRememberMe(UserStore(email,password,flag = false))
-        myViewModel.mutableStateFlow.value=null
+    private fun setUpDir(email: String, password: String) {
+        myViewModel.alwaysRememberMe(UserStore(email, password, flag = false))
+        myViewModel.mutableStateFlow.value = null
         dir(choose = 3)
     }
 
@@ -129,7 +129,7 @@ class RegistrationScreen : Fragment(R.layout.registration_fragment) {
                 )
             }
             else -> {
-                RegistrationScreenDirections.actionGlobalStudentDashBoard("don't_loading_screen")
+                RegistrationScreenDirections.actionRegistrationScreenToStudentDashBoard("don't_loading_screen")
             }
         }
         findNavController().navigate(action)

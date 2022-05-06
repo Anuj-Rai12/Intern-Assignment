@@ -126,7 +126,7 @@ class LoginScreen : Fragment(R.layout.login_fragment) {
     private fun dir(choose: Int = 0, message: String = "", title: String = "") {
         val action = when (choose) {
             0 -> LoginScreenDirections.actionGlobalDialog(title, message)
-            else -> LoginScreenDirections.actionGlobalStudentDashBoard()
+            else -> LoginScreenDirections.actionLoginScreenToStudentDashBoard()
         }
         findNavController().navigate(action)
     }

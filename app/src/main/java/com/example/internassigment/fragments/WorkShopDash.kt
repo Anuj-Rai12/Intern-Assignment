@@ -113,7 +113,7 @@ class WorkShopDash : Fragment(R.layout.work_shop_dash_fragment) {
     ) {
         val action = when (choose) {
             0 -> WorkShopDashDirections.actionGlobalDialog(title, message)
-            1 -> WorkShopDashDirections.actionGlobalStudentDashBoard()
+            1 -> WorkShopDashDirections.actionWorkShopDashToStudentDashBoard()
             else -> WorkShopDashDirections.actionWorkShopDashToLoginScreen(courseName!!)
         }
         findNavController().navigate(action)

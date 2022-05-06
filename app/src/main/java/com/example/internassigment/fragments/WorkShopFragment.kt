@@ -34,11 +34,11 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = WorkshopFragmentBinding.bind(view)
-        if (myViewModel.orientationFlag==true) {
+        if (myViewModel.orientationFlag == true) {
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
             Log.i(TAG, "onViewCreated: Initial Flag value ${StudentDashBoard.Flag}")
         }
-        if (StudentDashBoard.Flag!=null||FirebaseAuth.getInstance().currentUser==null) {
+        if (StudentDashBoard.Flag != null || FirebaseAuth.getInstance().currentUser == null) {
             setUpRecycleView()
             getAllWorkShop()
         }
@@ -92,10 +92,10 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
             val all = it as AllData
             allData.add(all)
         }
-        when(val op=allData.first()){
+        when (val op = allData.first()) {
             is AllData.Course -> Log.i(TAG, "setData: all data")
             is AllData.Users -> {
-                if (op.user.phone.toBoolean()){
+                if (op.user.phone.toBoolean()) {
                     change()
                     return
                 }
@@ -103,9 +103,10 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
         }
         workShopRecycleView?.submitList(allData)
     }
+
     @SuppressLint("SourceLockedOrientationActivity")
     private fun change() {
-        myViewModel.orientationFlag=true
+        myViewModel.orientationFlag = true
         val orientation = this.resources.configuration.orientation
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             Log.i(TAG, "onViewCreated: Screen Portrait mode ")
@@ -117,34 +118,27 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
     }
 
     override fun onStart() {
-    super.onStart()
-    FirebaseAuth.getInstance().currentUser?.let {
-        if (StudentDashBoard.Flag==null) {
-            val action = WorkShopFragmentDirections.actionGlobalStudentDashBoard()
-            findNavController().navigate(action)
-            hideLoading()
+        super.onStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideLoading()
+    }
+
+    private fun dir(
+        choose: Int = 0,
+        title: String = "Error",
+        message: String = "",
+        courseName: CourseName? = null
+    ) {
+        val action = when (choose) {
+            0 -> WorkShopDashDirections.actionGlobalDialog(title, message)
+            else -> WorkShopFragmentDirections.actionWorkShopFragmentToWorkShopDash(
+                title = courseName?.courseName!!,
+                course = courseName
+            )
         }
+        findNavController().navigate(action)
     }
-}
-
-override fun onPause() {
-    super.onPause()
-    hideLoading()
-}
-
-private fun dir(
-    choose: Int = 0,
-    title: String = "Error",
-    message: String = "",
-    courseName: CourseName? = null
-) {
-    val action = when (choose) {
-        0 -> WorkShopDashDirections.actionGlobalDialog(title, message)
-        else -> WorkShopFragmentDirections.actionWorkShopFragmentToWorkShopDash(
-            title = courseName?.courseName!!,
-            course = courseName
-        )
-    }
-    findNavController().navigate(action)
-}
 }
