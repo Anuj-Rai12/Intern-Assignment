@@ -49,7 +49,7 @@
         <action
             android:id="@+id/action_registrationScreen_to_studentDashBoard"
             app:destination="@id/studentDashBoard"
-            app:popUpTo="@id/registrationScreen"
+            app:popUpTo="@id/loginScreen"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
