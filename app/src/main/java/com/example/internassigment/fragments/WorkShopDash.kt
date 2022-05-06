@@ -44,34 +44,31 @@ class WorkShopDash : Fragment(R.layout.work_shop_dash_fragment) {
             dialogFlag = it.getBoolean(DIALOG_ONCE)
         }
         if (dialogFlag == true) {
-            applyForWork(args.course)
+            applyForWork(setNewObj(args.course))
         }
-        /*binding.CoursesImage.setAnimation(args.course.thumbnails)
-        val str = "Learn\n" + args.title
-        binding.courseTitle.text = str
-        binding.whyThisCourse.text = "Why to $str?"*/
         setRecyclerview()
-        /*args.course.whyChoose*/
         setData()
         binding.applyWorkShop.setOnClickListener {
             args.course.also { courseName ->
-                CourseName(
-                    id = courseName.id,
-                    courseName = courseName.courseName,
-                    thumbnails = courseName.thumbnails,
-                    week = courseName.week,
-                    courseSelected = true,
-                    whyChoose = courseName.whyChoose
-                ).also { name ->
-                    firebaseUser?.let {
-                        applyForWork(name)
-                        return@setOnClickListener
-                    }
-                    dir(23, courseName = name)
+                val obj = setNewObj(courseName)
+                firebaseUser?.let {
+                    applyForWork(obj)
+                    return@setOnClickListener
                 }
+                dir(23, courseName = obj)
             }
         }
     }
+
+    private fun setNewObj(courseName: CourseName) = CourseName(
+        id = courseName.id,
+        courseName = courseName.courseName,
+        thumbnails = courseName.thumbnails,
+        week = courseName.week,
+        totalTime = courseName.totalTime,
+        courseSelected = true,
+        whyChoose = courseName.whyChoose
+    )
 
     private fun hideLoading() = customProgress.hideLoading()
     private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)

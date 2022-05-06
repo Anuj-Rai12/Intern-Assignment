@@ -25,13 +25,25 @@ class AuthRepository @Inject constructor(
         val data = try {
             firebaseAuth.createUserWithEmailAndPassword(user.email, user.password).await()
             userDao.insertUser(user)
-            courseDao.updateCourseInfo(courseName)
+            courseDao.updateCourseInfo(getUpdatedCourseItem(courseName))
             MySealed.Success(null)
         } catch (e: Exception) {
             MySealed.Error(null, e)
         }
         emit(data)
     }.flowOn(IO)
+
+    companion object {
+        fun getUpdatedCourseItem(courseName: CourseName) = courseName.copy(
+            id = courseName.id,
+            courseName = courseName.courseName,
+            week = courseName.week,
+            thumbnails = courseName.thumbnails,
+            courseSelected = courseName.courseSelected,
+            totalTime = courseName.totalTime + 1,
+            whyChoose = courseName.whyChoose
+        )
+    }
 
     fun signInUser(
         courseDao: CourseDao,
@@ -42,7 +54,7 @@ class AuthRepository @Inject constructor(
         emit(MySealed.Loading("Validating User Details.."))
         val data = try {
             firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            courseDao.updateCourseInfo(courseName)
+            courseDao.updateCourseInfo(getUpdatedCourseItem(courseName))
             MySealed.Success(null)
         } catch (e: Exception) {
             MySealed.Error(null, e)

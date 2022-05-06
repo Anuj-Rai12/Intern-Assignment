@@ -43,7 +43,9 @@ class Repository @Inject constructor() {
                     listOf.add(AllData.Users(user))
                 }
                 selected.forEach { course ->
-                    listOf.add(AllData.Course(course))
+                    for (i in 1..course.totalTime) {
+                        listOf.add(AllData.Course(course))
+                    }
                 }
                 MySealed.Success(listOf)
             } catch (e: Exception) {
@@ -56,7 +58,7 @@ class Repository @Inject constructor() {
         emit(MySealed.Loading("Applying For Work Shop"))
         kotlinx.coroutines.delay(2000)
         val data = try {
-            courseDao.updateCourseInfo(courseName)
+            courseDao.updateCourseInfo(AuthRepository.getUpdatedCourseItem(courseName))
             MySealed.Success(null)
         } catch (e: Exception) {
             MySealed.Error(null, e)

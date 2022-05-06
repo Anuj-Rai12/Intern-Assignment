@@ -117,9 +117,6 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 
     override fun onPause() {
         super.onPause()

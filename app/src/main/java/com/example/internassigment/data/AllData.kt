@@ -22,14 +22,14 @@ data class User(
 @Parcelize
 data class CourseName(
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
+    val id: Int,
     val courseName: String,
     val week: Int,
-    val thumbnails:Int,
+    val thumbnails: Int,
     val courseSelected: Boolean,
-    val whyChoose: List<WhyChoose>?=null
+    val totalTime: Int = 0,
+    val whyChoose: List<WhyChoose>? = null
 ) : Parcelable
-
 
 
 @Parcelize

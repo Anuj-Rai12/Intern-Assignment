@@ -107,6 +107,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
     private fun setUpRecycleView() {
         binding.studentSelectedCourse.apply {
             workShopRecycleView = WorkShopRecycleView { CourseName ->
+                Log.i(TAG, "setUpRecycleView: $CourseName")
                 val message =
                     "You have Successfully Applied for ${CourseName.courseName}\nDuration : ${CourseName.week} Week long."
                 dir(title = "Applied", message = message)
