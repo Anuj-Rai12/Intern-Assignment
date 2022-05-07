@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.internassigment.MainActivity
 import com.example.internassigment.R
 import com.example.internassigment.data.AllData
 import com.example.internassigment.databinding.StudentDashboardFramgentBinding
@@ -41,6 +42,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = StudentDashboardFramgentBinding.bind(view)
+        (activity as MainActivity).isShowArrowHome(false)
         lifecycleScope.launch {
             myViewModel.rememberMe.asFlow().collect {
                 Log.i(TAG, "onViewCreated: ${it.email} and Password -> ${it.password}")
@@ -50,7 +52,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
         setUpRecycleView()
         setHasOptionsMenu(true)
         binding.addFloatingBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_studentDashBoard_to_workShopFragment)
+            dir(3, "", "")
         }
     }
 
@@ -126,11 +128,16 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
         }
     }
 
-    private fun dir(title: String, message: String) {
-        val action = StudentDashBoardDirections.actionGlobalDialog(
-            title = title,
-            message = message
-        )
+    private fun dir(id: Int = 1, title: String, message: String) {
+        val action = when (id) {
+            1 -> {
+                StudentDashBoardDirections.actionGlobalDialog(
+                    title = title,
+                    message = message
+                )
+            }
+            else -> StudentDashBoardDirections.actionStudentDashBoardToWorkShopFragment(true)
+        }
         findNavController().navigate(action)
     }
 

@@ -9,7 +9,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.internassigment.MainActivity
 import com.example.internassigment.R
 import com.example.internassigment.data.AllData
 import com.example.internassigment.data.CourseName
@@ -28,12 +30,14 @@ class WorkShopFragment : Fragment(R.layout.workshop_fragment) {
     private val myViewModel: MyViewModel by viewModels()
     private lateinit var binding: WorkshopFragmentBinding
     private var workShopRecycleView: WorkShopRecycleView? = null
+    private val args: WorkShopFragmentArgs by navArgs()
 
     @Inject
     lateinit var customProgress: CustomProgress
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = WorkshopFragmentBinding.bind(view)
+        (activity as MainActivity).isShowArrowHome(args.flag)
         if (myViewModel.orientationFlag == true) {
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
             Log.i(TAG, "onViewCreated: Initial Flag value ${StudentDashBoard.Flag}")
