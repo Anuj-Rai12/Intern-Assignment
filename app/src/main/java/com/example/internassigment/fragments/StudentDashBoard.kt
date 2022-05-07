@@ -56,12 +56,12 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
         }
     }
 
-    private fun hideLoading() = customProgress.hideLoading()
-    private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)
+    //private fun hideLoading() = customProgress.hideLoading()
+    //private fun showLoading(string: String) = customProgress.showLoading(requireActivity(), string)
 
     override fun onResume() {
         super.onResume()
-        hideLoading()
+        //hideLoading()
     }
 
     private fun getData(email: String, password: String) {
@@ -69,7 +69,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
             when (it) {
                 is MySealed.Error -> {
                     if (args.regflag.isNullOrEmpty())
-                        hideLoading()
+                        //hideLoading()
                     Flag = true
                     dir(
                         title = "Error",
@@ -77,12 +77,12 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
                     )
                 }
                 is MySealed.Loading -> {
-                    if (args.regflag.isNullOrEmpty())
-                        showLoading(it.data as String)
+                   // if (args.regflag.isNullOrEmpty())
+                        //showLoading(it.data as String)
                 }
                 is MySealed.Success -> {
                     if (args.regflag.isNullOrEmpty())
-                        hideLoading()
+                      //  hideLoading()
                     Flag = true
                     Log.i(TAG, "getData: Hit to Success iN Student")
                     val sqlData = it.data as MutableList<*>
@@ -103,7 +103,7 @@ class StudentDashBoard : Fragment(R.layout.student_dashboard_framgent) {
 
     override fun onPause() {
         super.onPause()
-        hideLoading()
+        //hideLoading()
     }
 
     private fun setUpRecycleView() {

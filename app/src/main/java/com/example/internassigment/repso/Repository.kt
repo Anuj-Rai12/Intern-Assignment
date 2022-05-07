@@ -34,7 +34,6 @@ class Repository @Inject constructor() {
     fun getAllUsers(email: String, password: String, userDao: UserDao, courseDao: CourseDao) =
         flow {
             emit(MySealed.Loading("User Info is Loading..."))
-            kotlinx.coroutines.delay(2000)
             val data = try {
                 val userInfo = userDao.getSignedInfo(email, pass = password)
                 val selected = courseDao.getCourseSelectedByUsers()

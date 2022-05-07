@@ -1,6 +1,7 @@
 package com.example.internassigment.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -90,6 +91,7 @@ class LoginScreen : Fragment(R.layout.login_fragment) {
                 when (it) {
                     is MySealed.Error -> {
                         hideLoading()
+                        Log.i(TAG, "signIn: ${it.exception?.localizedMessage}")
                         myViewModel.mutableStateFlow.value = null
                         dir(
                             message = it.exception?.localizedMessage ?: "UnWanted Error",
@@ -115,7 +117,8 @@ class LoginScreen : Fragment(R.layout.login_fragment) {
             }
             myViewModel.mutableStateFlow.value = null
             dir(3)
-        }
+        } else
+            dir(3)
     }
 
     override fun onPause() {
